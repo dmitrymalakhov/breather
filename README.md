@@ -1,78 +1,153 @@
-# Суфлёр
+# Sufler
 
-Локальное веб-приложение для очных встреч на Mac. Микрофон → потоковые реплики с метками голосов → короткая предварительная подсказка → уточнение по выбранным документам и веб-источникам. Интерфейс и SQLite работают локально; речь, генерация и embeddings обрабатываются выбранными облачными API.
+**Stay with the conversation. Keep the next useful answer close.**
 
-## Запуск
+Sufler (Суфлёр, “prompter”) is a local web app for in-person meetings on a Mac. It turns microphone audio into a live transcript, surfaces short contextual hints, and refines answers using selected documents and optional web sources. Meeting history, documents, and settings stay on your machine; speech recognition and AI processing use the APIs you choose.
 
-Откройте Terminal и выполните:
+This repository is named **breather**; the application is branded **Sufler**. The current interface is in Russian. This README is in English.
+
+![Sufler meeting workspace with a live transcript and a contextual hint](docs/images/meeting.png)
+
+*Actual application screenshot in demo mode: fictional dialogue and prepared hints, with no microphone or cloud requests.*
+
+## What it does
+
+- **Follow the conversation:** streaming transcription with corrections to partial text. Deepgram supports speaker labels; ElevenLabs uses a single conversation feed.
+- **Get help in context:** short preliminary answers, explanations of terms, and possible questions, followed by source-backed refinements when available.
+- **Bring your materials:** searchable PDF, TXT, and Markdown documents with links to the passages used in an answer.
+- **Keep the meeting in focus:** an editable goal, a rolling summary, questions, topics, and decisions linked to transcript evidence.
+- **Keep hints nearby:** a compact mini window with the same hints, pinning, and pause controls as the main workspace.
+- **Review afterward:** local meeting history, latency measurements, token usage, and estimated spending based on your configured rates.
+
+## Quick start
+
+Install **Node.js 24 LTS**, npm, and Google Chrome, then run:
 
 ```sh
-cd /Users/dmitrii.malakhov/git/breather
+git clone https://github.com/dmitrymalakhov/breather.git
+cd breather
 npm start
 ```
 
-Откройте **http://127.0.0.1:4317** в Chrome. Остановить сервер: `Ctrl+C` в терминале.
+Open [http://127.0.0.1:4317](http://127.0.0.1:4317) in Chrome. Stop the server with `Ctrl+C` in the terminal.
 
-Нужен Node.js **24 LTS** и npm. На этом Mac запуск также умеет использовать установленный рядом с Codex Node.js 24. При первом запуске отсутствующие зависимости устанавливаются автоматически по `package-lock.json`; затем собираются интерфейс и сервер. Если `better-sqlite3` был установлен под другой версией Node, скрипт пересоберёт его. `SUFLER_NODE_BIN` позволяет явно задать путь к Node.
+The startup script installs missing dependencies from `package-lock.json`, builds the client and server, and rebuilds `better-sqlite3` if its native module was installed under a different Node version. It can also find Node.js 24 in a local Codex runtime or an nvm installation. Set `SUFLER_NODE_BIN` to provide an explicit Node executable.
 
-Без ключей нажмите **«Посмотреть пример»**: это вымышленные реплики и подготовленные подсказки. Демонстрация не использует микрофон и облачные API.
+**Try it without API keys:** select **“Посмотреть пример” (View demo)**. The demo uses fictional dialogue and prepared hints, without accessing the microphone or cloud APIs.
 
-## Первая живая встреча
+![Sufler start screen with microphone selection, API setup, and a demo option](docs/images/start.png)
 
-1. Нажмите **«Подключить API»** и выберите сервис распознавания (Deepgram или ElevenLabs) и введите его API-ключ и ключ модели. По умолчанию: OpenAI Responses, `https://api.openai.com/v1`, модель `gpt-6-luna`. Нажмите **«Проверить и сохранить»**. После сохранения приложение возвращается к запуску встречи. Выбор модели и API находится в раскрываемом блоке. Проверяется подключение генерации; Сервис речи проверяется при начале распознавания. ElevenLabs использует Scribe v2 Realtime: реплики идут общей лентой «Разговор», без разделения голосов и отметки «Это я». Ключ создаётся в аккаунте ElevenLabs в разделе Developers → API Keys с доступом к Speech to Text. Для смены сервиса или его ключа во время встречи сначала нажмите «Пауза», сохраните настройки и продолжите встречу.
-2. При необходимости добавьте PDF с текстовым слоем, TXT или Markdown в **«Документах»**. Дождитесь окончания индексирования. Файлы должны быть в UTF-8, до 20 МБ; PDF — до 500 страниц. Сканированные PDF требуют внешнего OCR.
-3. По желанию раскройте **«Добавить вводные и материалы»**: задайте цель, роль и знакомство с темой, выберите готовые документы. Этот шаг можно пропустить.
-4. Выберите микрофон, нажмите **«Начать встречу»**, разрешите Chrome доступ к микрофону. Если macOS блокирует доступ, разрешите его для Chrome в «Системные настройки → Конфиденциальность и безопасность → Микрофон».
-5. При использовании Deepgram нажмите имя говорящего, чтобы переименовать его или отметить **«Это я»**. Имена по голосу не определяются. После переподключения сервиса речи голоса получают новые метки: проверьте их заново.
-6. **«Пауза»** выключает микрофон; **«Продолжить»** подключает его снова. **«Завершить»** сохраняет встречу в истории и освобождает аудиоустройства.
+*Start with a demo, or connect speech recognition and an AI provider for a live meeting.*
 
-Лента продолжает работать во время генерации и поиска. Промежуточный текст обновляется на месте. Прокрутите ленту вверх, чтобы читать старые реплики без автопрокрутки; кнопка «К новым репликам» возвращает слежение.
+## Your first live meeting
 
-Справа показаны максимум три текущие или закреплённые подсказки. Предыдущие доступны в раскрываемом архиве. Источники раскрываются вместе с использованными фрагментами; документ открывается на соответствующем фрагменте. «Возможный вопрос» — прогноз модели. «Предварительно» — ответ без подтверждения источниками.
+1. Select **“Подключить API” (Connect APIs)**. Choose Deepgram or ElevenLabs and enter its speech API key and your generation API key. Defaults: OpenAI Responses, `https://api.openai.com/v1`, and `gpt-6-luna`. Expand the model/API section to change them. Select **“Проверить и сохранить” (Test and save)** to return to the launcher. This checks generation connectivity; speech connectivity is checked when recognition starts.
+2. Optionally add a text-layer PDF, TXT, or Markdown file under **“Документы” (Documents)** and wait for indexing. Text files must be UTF-8. Uploads are limited to 20 MB; PDFs to 500 pages. Scanned PDFs require external OCR.
+3. Optionally expand **“Добавить вводные и материалы” (Add context and materials)** to set your goal, role, familiarity with the topic, and selected documents.
+4. Choose a microphone and select **“Начать встречу” (Start meeting)**. Allow microphone access in Chrome. If macOS blocks it, enable Chrome under System Settings → Privacy & Security → Microphone.
+5. With Deepgram, select a speaker name to rename it or mark **“Это я” (This is me)**. Names are assigned manually. After speech reconnects, speakers receive new labels; check them again.
+6. **“Пауза” (Pause)** turns off the microphone; **“Продолжить” (Resume)** reconnects it. **“Завершить” (Finish)** saves the meeting to history and releases audio devices.
 
-## Смена модели и поиск
+ElevenLabs uses Scribe v2 Realtime and shows a single **“Разговор” (Conversation)** feed, without speaker separation or a “This is me” marker. Create its key under Developers → API Keys with Speech to Text access. To change the speech provider or its key during a meeting, pause, save the settings, and resume.
 
-**OpenAI Responses** и **OpenAI-совместимый Chat Completions API** — независимые адаптеры. Для совместимого провайдера задайте его `baseURL`, model ID и ключ. URL должен быть HTTPS; для локальных моделей разрешён HTTP на `localhost`/`127.0.0.1`. Серверу нужен корректный потоковый ответ соответствующего протокола. Новый адрес требует нового ключа: приложение не пересылает прежний ключ другому серверу.
+Transcription continues during generation and retrieval. Partial text updates in place. Scroll upward to read older turns without automatic scrolling; **“К новым репликам” (Jump to latest)** restores following.
 
-Настройки можно сохранить во время встречи. Сначала выполняется небольшой тестовый запрос. При успехе старая генерация отменяется, а новая модель получает текущий контекст. Распознавание продолжает работать. При неверном ключе, лимите или ошибке новые настройки не заменяют работающие.
+The hints panel shows up to three current or pinned hints. Earlier hints are available in an expandable archive. Expand sources to inspect the passages used; document links open the corresponding excerpt. **“Возможный вопрос” (Possible question)** is a model prediction. **“Предварительно” (Preliminary)** means the answer has not been confirmed by sources.
 
-Embeddings настроены отдельно: по умолчанию `text-embedding-3-small`. Если отдельного ключа нет, используется введённый ключ OpenAI. Смена модели подсказок не требует переиндексации. При смене **модели или адреса embeddings** загрузите материалы заново; старые векторы с другим идентификатором не используются. Без embeddings остаётся SQLite FTS5: поиск по словам, без русской морфологии.
+## How it works
 
-Tavily необязателен. Поиск вызывается для внешних сведений по отдельному публичному запросу, сформированному до добавления фрагментов документов. В запрос Tavily не передаются сами документы. Если модель не может отделить публичную тему от частных деталей, инструкция требует отказаться от веб-поиска. Ошибка поиска сохраняет предварительный ответ.
+```mermaid
+flowchart LR
+    Mic[Microphone] --> Audio[Browser AudioWorklet]
+    Audio --> Server[Local Fastify server]
+    Server --> Speech[Deepgram or ElevenLabs]
+    Speech --> Transcript[Live transcript]
+    Transcript --> Context[Recent turns, goal and meeting memory]
+    Context --> Model[Selected generation API]
+    Model --> Hints[Hints and refinements]
+    Docs[Selected documents] --> Retrieval[Local FTS5 and optional embeddings]
+    Retrieval --> Model
+    Web[Optional Tavily search] --> Model
+    Transcript --> DB[(Local SQLite)]
+    Hints --> DB
+    Hints --> Mini[Mini window]
+```
 
-## Данные и границы
+The browser captures mono PCM16 audio, resamples it to 24 kHz, and sends 100 ms packets to the local server. The server connects to your chosen speech service and normalizes its events. Generation uses recent conversation, the meeting goal, and accumulated meeting memory. Document retrieval and optional web search can refine the preliminary answer.
 
-- Сервер слушает только `127.0.0.1`, проверяет Host и Origin; изменяющие HTTP-запросы и WebSocket принимаются только от интерфейса. Одну встречу одновременно захватывает одна вкладка.
-- Ключи: `.env.local` с правами `0600`. Через API возвращаются только признаки наличия ключей. Ключи не попадают в клиентскую сборку и журналы. Настройки можно также задать через переменные окружения; они имеют приоритет над файлом. Пример — `.env.example`.
-- История, текст документов, векторы, подсказки, выдержки источников и замеры: `data/sufler.sqlite`. История хранится до удаления через интерфейс. Для переноса/резервной копии остановите сервер и скопируйте каталог `data`; ключи копируются отдельно.
-- Исходный звук находится только в оперативной памяти и передаётся выбранному сервису речи. Аудиофайлы и исходные загруженные документы на диск не записываются. Текст документов сохраняется в SQLite.
-- Для обработки Deepgram или ElevenLabs получает звук, выбранная модель — контекст встречи и используемые фрагменты, embeddings API — текст индексируемых документов. Локальное хранение не означает локальную обработку этих данных.
-- При обрыве речи старое аудио не накапливается; потерянный участок отмечается в ленте. После закрытия вкладки сервер приостанавливает поток. После перезапуска незавершённые встречи открываются как завершённые: текст сохраняется, микрофон автоматически не включается.
-- Первая версия слушает микрофон очной встречи. Захват системного звука, онлайн-звонков, OCR и определение настоящих имён по голосу не входят в неё.
+## Compact workspace and mini mode
 
-Приложение предполагает, что участники знают о передаче речи сервису распознавания. Модель может ошибаться; источники позволяют проверить её утверждения.
+The meeting header stays compact so the live feeds can use most of the window height. **“Контекст” (Context)** opens the goal, summary, and usage panel. On mobile layouts, hints appear before the transcript. Select the microphone icon to choose an audio device; device changes require pausing.
 
-## Архитектура
+<img src="docs/images/mini.png" alt="Sufler mini window showing a contextual hint, pin control, and pause button" width="420">
 
-| Каталог | Назначение |
+*Mini mode showing the same demo hint. This screenshot uses the ordinary popup fallback.*
+
+Desktop Chrome uses Document Picture-in-Picture for a window that stays above other applications. If the API is unavailable, Sufler opens an ordinary popup, without an always-on-top guarantee. If PiP fails, a button offers the ordinary window. Allow popups if your browser blocks them. The embedded Codex browser may support only the ordinary window; use desktop Chrome for the floating mode.
+
+The mini window is a React portal into a same-origin document. It shares the existing meeting, WebSocket, microphone, and generation flow. Pinning, sources, and pause controls operate on that meeting. You can minimize the main window, but its tab must stay open; closing it also closes the mini window.
+
+## Models, documents, and search
+
+**OpenAI Responses** and **OpenAI-compatible Chat Completions** have independent adapters. For a compatible provider, enter its `baseURL`, model ID, and key. URLs must use HTTPS; local models may use HTTP on `localhost` or `127.0.0.1`. The provider must return a valid stream for the selected protocol. Changing the address requires a new key so an existing key is not forwarded to another server.
+
+You can save generation settings during a meeting. Sufler first makes a small test request. If it succeeds, the old generation is canceled and the new model receives the current context while transcription continues. Invalid keys, limits, and connection errors leave the working settings intact.
+
+Embeddings are configured separately and default to `text-embedding-3-small`. Without a separate key, the configured OpenAI key is used. Changing the hint model does not require reindexing. If you change the **embedding model or endpoint**, upload the materials again: vectors with a different identifier are not used. Without embeddings, SQLite FTS5 provides keyword search without Russian morphology.
+
+Tavily is optional. External facts are searched through a separate public query generated before document passages are added. Documents themselves are not sent in the Tavily query. The model is instructed to skip web search if it cannot separate a public topic from private details. Search failures preserve the preliminary answer.
+
+## Meeting memory and spending
+
+The **“Фокус встречи” (Meeting focus)** section, available through Context, stores questions, topics, and decisions with links to finalized transcript turns. Mark a question as answered; that manual status persists through later updates. You can edit the goal during the meeting to guide concrete next steps.
+
+Earlier items remain when the topic changes. The rolling summary and open questions supplement the last two minutes of transcript used for hints. Summaries are model interpretations: evidence links confirm that a turn exists, not that the interpretation is correct. Paraphrased items may be duplicated.
+
+SQLite records generation attempts, actual input/output/cached token counts from API usage, errors and cancellations, and audio seconds sent per speech connection. Compatible APIs must support `stream_options.include_usage`; without usage, tokens and cost are explicitly unknown. Providers may charge for canceled requests even when usage is unavailable.
+
+Per-meeting statistics appear in history; overall totals appear in rate settings. Deleting a meeting removes its usage from the totals. Usage for older history is not reconstructed.
+
+Speech cost is estimated from audio duration; generation cost from tokens. Estimates use your configured USD rates and do not query provider invoices, rounding, or plan discounts. Check [ElevenLabs pricing](https://elevenlabs.io/pricing/api) and [Deepgram pricing](https://deepgram.com/pricing) before setting rates. Fill in generation prices for the selected model ID and API; changing either resets those prices. Embeddings and Tavily costs are not tracked yet. `BILLING_RATES` and `SPEECH_OPTIONS` are stored as JSON in local settings.
+
+Silence is not automatically removed from the audio stream, and the speech model is not automatically downgraded to save money. Pausing stops audio transmission. Shorter endpointing can finalize turns sooner but may split phrases; its quality tradeoff needs comparison on real conversations.
+
+## Data and boundaries
+
+- **Local server:** binds to `127.0.0.1` and validates Host and Origin. Mutating HTTP requests and WebSockets are accepted only from the app interface. One tab owns a meeting at a time.
+- **Keys:** stored in `.env.local` with `0600` permissions. The public API exposes only whether keys are configured. Keys are excluded from client builds and logs. Environment variables take precedence over file settings; see [.env.example](.env.example).
+- **Storage:** history, document text, vectors, hints, source excerpts, and measurements live in `data/sufler.sqlite` until removed through the interface. For backup or migration, stop the server and copy `data`; copy keys separately.
+- **Audio and uploads:** raw audio stays in memory and is sent to the selected speech service. Audio files and original uploaded documents are not written to disk. Extracted document text is stored in SQLite.
+- **Cloud processing:** Deepgram or ElevenLabs receives audio; the selected generation model receives meeting context and the passages used; the embedding API receives indexed document text. Storage is local; these processing steps use cloud APIs.
+- **Interruptions:** old audio is not queued after a speech outage, and missing segments are marked in the transcript. Closing the tab pauses the stream. After a server restart, unfinished meetings open as completed; text remains saved and the microphone stays off.
+- **Scope:** this version captures an in-person meeting microphone. System audio capture, online-call capture, OCR, and identifying real names from voices are outside its current scope.
+
+The app assumes participants know their speech is sent to a recognition provider. Models can make mistakes; inspect sources when checking a claim.
+
+## Architecture
+
+| Path | Responsibility |
 |---|---|
-| `src/` | React, управление микрофоном, лента, подсказки, документы и настройки |
-| `public/audio-worklet.js` | Mono PCM16, ресэмплинг до 24 кГц, пакеты по 100 мс, уровень звука |
-| `shared/types.ts` | Общие события и типы браузера/сервера |
-| `server/speech.ts` | `SpeechProvider`, Deepgram Nova-3 / ElevenLabs Scribe v2 Realtime, нормализация реплик, восстановление |
-| `server/session.ts` | Контекст за две минуты, краткое содержание, объединение триггеров, отмена и версии |
-| `server/ai.ts` | Потоки OpenAI Responses/Chat Completions, JSON-решение, embeddings, ошибки |
-| `server/documents.ts` | PDF.js в отдельном worker, фрагменты, FTS5/векторы, Tavily |
-| `server/store.ts` | SQLite и миграции, локальная история и метрики |
-| `server/app.ts` | Fastify, HTTP/WebSocket, проверка Origin/Host, раздача интерфейса |
+| `src/` | React UI, microphone control, transcript, hints, documents, and settings |
+| `public/audio-worklet.js` | Mono PCM16, 24 kHz resampling, 100 ms packets, and audio level |
+| `shared/types.ts` | Shared browser/server events and types |
+| `server/speech.ts` | `SpeechProvider`, Deepgram Nova-3 / ElevenLabs Scribe v2 Realtime, turn normalization, and recovery |
+| `server/session.ts` | Two-minute context, summary, trigger coalescing, cancellation, and versions |
+| `server/ai.ts` | OpenAI Responses / Chat Completions streams, JSON decisions, embeddings, and errors |
+| `server/documents.ts` | PDF.js worker, passages, FTS5/vector retrieval, and Tavily |
+| `server/store.ts` | SQLite, migrations, local history, and metrics |
+| `server/app.ts` | Fastify, HTTP/WebSocket, Origin/Host checks, and static UI serving |
 
-ElevenLabs: `model_id=scribe_v2_realtime`, `audio_format=pcm_24000`, `commit_strategy=vad`, `vad_silence_threshold_secs=0.5` по умолчанию; доступны 300/500/1000 мс и автоматический либо русский язык. Времена реплик оцениваются по отправленному аудио; точная задержка распознавания для ElevenLabs не измеряется.
+ElevenLabs configuration: `model_id=scribe_v2_realtime`, `audio_format=pcm_24000`, `commit_strategy=vad`, and default `vad_silence_threshold_secs=0.5`. Available silence thresholds are 300/500/1000 ms; language options are automatic or Russian. Turn timestamps are estimated from sent audio; exact recognition latency is not measured for ElevenLabs.
 
-Deepgram: `model=nova-3`, `language=multi`, `interim_results=true`, `diarize_model=v1`, `endpointing=500` по умолчанию (настраивается), `encoding=linear16`, `sample_rate=24000`, `channels=1`. Подсказки: `gpt-6-luna` с `reasoning.effort=none`. API-адаптеры не зависят от UI; новый `SpeechProvider` обязан объявить `supportsSpeakers`.
+Deepgram configuration: `model=nova-3`, `language=multi`, `interim_results=true`, `diarize_model=v1`, configurable `endpointing=500` by default, `encoding=linear16`, `sample_rate=24000`, and `channels=1`. The default hint model is `gpt-6-luna` with `reasoning.effort=none`. API adapters are independent of the UI; each new `SpeechProvider` must declare `supportsSpeakers`.
 
-Один первичный анализ и одно уточнение могут идти одновременно. Новый контекст объединяется вместо роста очереди. Уточнение отменяется при смене актуальной версии; ответы от старой модели после её смены не публикуются. Устойчивый промежуточный текст анализируется после 650 мс без изменения, с интервалом запусков не менее 4 секунд; для распознанного вопроса и смены цели/модели — 1,5 секунды. Конспект обновляется раз в минуту по новым окончательным репликам, максимум 80 реплик / 18 000 символов за пакет; при завершении обрабатывается накопленный остаток.
+One primary analysis and one refinement may run concurrently. New context is coalesced instead of growing a queue. Refinements are canceled when the active version changes; responses from a previous model are not published after switching models.
 
-## Проверки и задержка
+Stable partial text is analyzed after 650 ms without changes, with at least four seconds between launches. Recognized questions and goal/model changes use a 1.5-second interval. The summary updates every minute from new finalized turns, in batches of at most 80 turns / 18,000 characters. Remaining turns are processed when the meeting finishes.
+
+## Verification and latency
+
+Run checks under **Node.js 24**:
 
 ```sh
 npm run build
@@ -80,35 +155,23 @@ npm test
 npm run test:e2e
 ```
 
-Тесты запускайте под Node.js 24. Playwright использует установленный Google Chrome и два изолированных локальных сервера с тестовыми провайдерами. API-ключи и платные облачные запросы для тестов не нужны.
+Playwright uses installed Google Chrome and two isolated local servers with test providers. Tests require no API keys or paid cloud requests.
 
-Проверены: 31 тест Vitest и 10 сценариев Playwright. Они охватывают протоколы обоих моделей, отмену, идентификаторы голосов, исправления промежуточных реплик, хранение и права ключей, PDF/Markdown/TXT и OCR-ошибку, реальные AudioWorklet/getUserMedia в Chrome с тестовым устройством, паузу/освобождение микрофона, документы/историю и мобильную ширину. Ускоренная симуляция часа передаёт 36 000 аудиопакетов и 1 200 реплик, пока модель занята; это **не** часовой полевой тест.
+The current version passed **31 Vitest tests and 10 Playwright scenarios**. Coverage includes both generation protocols, cancellation, speaker identifiers, partial-turn corrections, persistence and key permissions, PDF/Markdown/TXT handling and OCR errors, real AudioWorklet/getUserMedia with a synthetic Chrome microphone, pause/device release, documents/history, mobile widths, and mini-window behavior.
 
-Внизу подсказок раскрываются замеры:
+An accelerated one-hour simulation sends 36,000 audio packets and 1,200 turns while the model is busy. This is a simulation, not a one-hour field trial. See [VERIFICATION.md](VERIFICATION.md) for the detailed verification log in Russian.
 
-- **Подсказка p50/p95:** от принятого триггера анализа до первого законченного предложения; включает ожидание запуска.
-- **Модель p50/p95:** от начала запроса до этого предложения.
-- **Распознавание:** от последнего аудиопакета соответствующей реплики до её получения. Метка времени берётся из захвата в браузере; это оценка по пакетам по 100 мс.
-- **От конца реплики до ответа:** для `answer` с доступной меткой речи, включая распознавание и ожидание модели. При ответе на более ранний вопрос значение привязано к последней окончательной реплике текущего контекста.
+Expand the measurements below the hints to inspect:
 
-Демонстрационные замеры не характеризуют облачные API. Цель p50 ≤2 с / p95 ≤4 с после достаточного распознанного контекста пока **не подтверждена**. Также не подтверждено качество диаризации на реальной русскоязычной встрече с 2–4 участниками.
+- **Hint p50/p95:** from the accepted analysis trigger to the first complete sentence, including launch delay.
+- **Model p50/p95:** from request start to that sentence.
+- **Recognition:** from the last audio packet associated with a turn to receiving it, estimated from browser capture timestamps in 100 ms packets.
+- **End of turn to answer:** for `answer` events with a speech timestamp, including recognition and model wait time. Answers to earlier questions are associated with the latest finalized turn in the current context.
 
-Для первого испытания: 10–15 минут реального разговора, затем часовая встреча; отметить вопросы/термины, перебивания и смены темы, проверить метки участников и источники, сохранить p50/p95. Во время встречи сменить модель, проверить неверный ключ и на короткое время прервать сеть. После завершения убедиться, что индикатор микрофона Chrome погас, а сохранённая история открывается после перезапуска.
+Demo measurements do not represent cloud performance. The target of **p50 ≤2 seconds / p95 ≤4 seconds** after sufficient recognized context is **not yet validated**. Neither is diarization quality in a real Russian-language meeting with 2–4 participants. Automated PiP tests validate the API and shared application state; physical always-on-top behavior over other macOS apps has not been field-tested.
 
-## Длинные встречи и расход
+For an initial field trial, start with 10–15 minutes of real conversation, then a one-hour meeting. Track questions, terms, interruptions, and topic changes; check speaker labels, sources, and p50/p95. Switch models during the meeting, try an invalid key, and briefly interrupt the network. After finishing, confirm that Chrome's microphone indicator is off and history survives a server restart.
 
-Блок «Фокус встречи», открываемый кнопкой «Контекст», хранит вопросы, темы и принятые решения со ссылками на окончательные реплики. Вопрос можно отметить отвеченным; ручная отметка сохраняется при последующих обновлениях. Цель редактируется во время встречи и передаётся модели для конкретных следующих шагов. Прежние записи не удаляются при смене темы; краткий конспект и открытые вопросы дополняют последние две минуты контекста подсказок. Конспект является извлечением модели, а ссылки подтверждают наличие реплики, не правильность интерпретации. Перефразированные пункты могут дублироваться.
+## License
 
-SQLite сохраняет попытки запросов модели, фактические входные/выходные/кэшированные токены из usage API, ошибки/отмены и отправленные секунды аудио по подключениям речи. Совместимый API должен поддерживать stream_options.include_usage; без usage токены и цена явно неизвестны. Отменённые запросы могут быть оплачены провайдером, даже когда usage не получен. Статистика встречи доступна в её истории; общая сумма — в настройках тарифов. Удаление встречи удаляет её расход из общей суммы. Старая история не восстанавливается.
-
-Речь оплачивается по времени аудио, модель подсказок — по токенам. Стоимость приблизительная, по введённым USD-ставкам; облачный счёт, округление и скидки плана не запрашиваются. Начальные ставки на 11.10.2026: ElevenLabs Realtime $0.39/час; Deepgram Nova-3 Multilingual $0.348/час по временной акции + $0.12/час за диаризацию = $0.468/час. Источники: https://elevenlabs.io/pricing/api и https://deepgram.com/pricing. Цены модели нужно заполнить для выбранного Model ID и API; при их смене цены сбрасываются. Embeddings и Tavily пока не учитываются. `BILLING_RATES` и `SPEECH_OPTIONS` сохраняются JSON в локальных настройках.
-
-Аудио не обрезается по тишине и модель распознавания не удешевляется автоматически. Пауза останавливает передачу аудио. Короткий порог завершения ускоряет окончательные реплики, но может дробить фразы; отсутствие потери качества на реальном разговоре требует сравнения.
-
-## Компактный экран и мини-режим
-
-При открытой встрече шапка компактная, живые ленты используют основную высоту окна. Кнопка «Контекст» открывает цель/конспект/расход сбоку. На мобильном экране подсказки отображаются раньше расшифровки. Нажмите значок микрофона для выбора устройства; во время записи выбор заблокирован до паузы.
-
-«Мини-режим» в настольном Chrome использует Document Picture-in-Picture API: окно остаётся поверх других приложений и показывает те же актуальные/закреплённые подсказки. Если API отсутствует, открывается обычное всплывающее окно без гарантии расположения поверх приложений. При отказе PiP есть кнопка запуска обычного окна. Разрешите всплывающие окна, если браузер их блокирует. Встроенный браузер Codex может предоставлять только обычное окно; для плавающего режима откройте http://127.0.0.1:4317/ в Chrome.
-
-Мини-режим реализован React portal в same-origin документ. Он не открывает второй WebSocket, не захватывает микрофон повторно и не вызывает генерацию самостоятельно. Закрепления/источники/пауза работают через основную встречу. Можно свернуть основное окно; основная вкладка должна оставаться открытой. При её закрытии мини-окно закрывается.
+[Apache License 2.0](LICENSE).
