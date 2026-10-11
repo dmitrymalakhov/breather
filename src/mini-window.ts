@@ -1,3 +1,4 @@
+import { t, getLanguage } from './i18n';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 type MiniTarget = { container: HTMLElement; window: Window; floating: boolean };
@@ -23,21 +24,21 @@ export function useMiniWindow() {
       const pip = (window as Window & { documentPictureInPicture?: PictureInPicture }).documentPictureInPicture;
       const floating = !ordinary && !!pip;
       const mini = floating ? await pip!.requestWindow({ width: 420, height: 560 }) : window.open('', '_blank', 'popup,width=420,height=560');
-      if (!mini) throw new Error('Разрешите всплывающие окна для Суфлёра и повторите запуск мини-режима.');
-      mini.document.title = 'Суфлёр · мини-режим';
+      if (!mini) throw new Error(t("Разрешите всплывающие окна для Суфлёра и повторите запуск мини-режима."));
+      mini.document.title = t("Суфлёр · мини-режим");
       const base = mini.document.createElement('base'); base.href = window.location.href; mini.document.head.append(base);
       for (const source of document.querySelectorAll('link[rel="stylesheet"], style')) {
         const copy = source.cloneNode(true) as HTMLElement;
         if (copy instanceof HTMLLinkElement) copy.href = (source as HTMLLinkElement).href;
         mini.document.head.append(copy);
       }
-      mini.document.documentElement.lang = 'ru'; mini.document.body.className = 'mini-window';
+      mini.document.documentElement.lang = getLanguage(); mini.document.body.className = 'mini-window';
       const container = mini.document.createElement('div'); mini.document.body.append(container);
       const next = { container, window: mini, floating }; current.current = next;
       mini.addEventListener('pagehide', () => { if (current.current === next) { current.current = null; setTarget(null); } }, { once: true });
       setTarget(next);
     } catch (e) {
-      setError(e instanceof Error && e.message.startsWith('Разрешите') ? e.message : 'Браузер не открыл окно поверх приложений. Попробуйте обычное окно или откройте Суфлёр в Chrome.');
+      setError(e instanceof Error && e.message === t('Разрешите всплывающие окна для Суфлёра и повторите запуск мини-режима.') ? e.message : t("Браузер не открыл окно поверх приложений. Попробуйте обычное окно или откройте Суфлёр в Chrome."));
     } finally { opening.current = false; }
   };
   return { target, open, close, error };

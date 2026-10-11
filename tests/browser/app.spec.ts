@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+test.beforeEach(async ({ page }) => { await page.addInitScript(() => localStorage.setItem('breather.language', 'ru')); });
 // Keep an interrupted scenario from leaving another test's demo meeting active.
 test.afterEach(async ({request}) => {
  const meetings=await request.get('/api/meetings').then(r=>r.json());
@@ -39,9 +40,9 @@ test('usage shows unknown amounts and configurable language and rates',async({pa
  await page.getByLabel('Язык встречи',{exact:true}).selectOption('ru');
  await page.getByLabel('Пауза для завершения реплики',{exact:true}).selectOption('300');
  await page.locator('.billing-options > summary').click();
- await expect(page.locator('.usage-panel')).toContainText('$0.3900 + неизвестная часть');
+ await expect(page.locator('.usage-panel')).toContainText('$0,3900 + неизвестная часть');
  await page.locator('.usage-panel > summary').click();
- await expect(page.locator('.usage-panel')).toContainText('60.0 мин');
+ await expect(page.locator('.usage-panel')).toContainText('60,0 мин');
  await page.getByLabel('Модель · $ за 1 млн входных токенов',{exact:true}).fill('2');
  await page.setViewportSize({width:390,height:844});
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
@@ -83,7 +84,7 @@ test('settings and responsive layout fit the viewport', async ({ page }) => {
   await expect(page.locator('input[type=password]')).toHaveCount(4);
   await page.setViewportSize({ width: 390, height: 844 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-  await page.getByRole('button', { name: 'Суфлёр, встреча' }).click();
+  await page.getByRole('button', { name: 'Breather, встреча' }).click();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
 test('quick start hides optional fields and returns after two-key setup', async ({ page }) => {

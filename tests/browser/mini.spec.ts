@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+test.beforeEach(async ({ page }) => { await page.addInitScript(() => localStorage.setItem('breather.language', 'ru')); });
 // Keep an interrupted scenario from leaving another test's demo meeting active.
 test.afterEach(async ({request}) => {
  const meetings=await request.get('/api/meetings').then(r=>r.json());

@@ -1,12 +1,12 @@
-# Sufler
+# Breather
 
 **Stay with the conversation. Keep the next useful answer close.**
 
-Sufler (Суфлёр, “prompter”) is a local web app for in-person meetings on a Mac. It turns microphone audio into a live transcript, surfaces short contextual hints, and refines answers using selected documents and optional web sources. Meeting history, documents, and settings stay on your machine; speech recognition and AI processing use the APIs you choose.
+Breather is a local web app for in-person meetings on a Mac. It turns microphone audio into a live transcript, surfaces short contextual hints, and refines answers using selected documents and optional web sources. Meeting history, documents, and settings stay on your machine; speech recognition and AI processing use the APIs you choose.
 
-This repository is named **breather**; the application is branded **Sufler**. The current interface is in Russian. This README is in English.
+The interface supports **English and Russian**, with English as the default. Use the language selector in the header to switch instantly; your preference is saved in this browser. The mini window follows the same preference.
 
-![Sufler meeting workspace with a live transcript and a contextual hint](docs/images/meeting.png)
+![Breather meeting workspace with a live transcript and a contextual hint](docs/images/meeting.png)
 
 *Actual application screenshot in demo mode: fictional dialogue and prepared hints, with no microphone or cloud requests.*
 
@@ -33,26 +33,36 @@ Open [http://127.0.0.1:4317](http://127.0.0.1:4317) in Chrome. Stop the server w
 
 The startup script installs missing dependencies from `package-lock.json`, builds the client and server, and rebuilds `better-sqlite3` if its native module was installed under a different Node version. It can also find Node.js 24 in a local Codex runtime or an nvm installation. Set `SUFLER_NODE_BIN` to provide an explicit Node executable.
 
-**Try it without API keys:** select **“Посмотреть пример” (View demo)**. The demo uses fictional dialogue and prepared hints, without accessing the microphone or cloud APIs.
+**Try it without API keys:** select **View demo**. The demo uses fictional dialogue and prepared hints, without accessing the microphone or cloud APIs.
 
-![Sufler start screen with microphone selection, API setup, and a demo option](docs/images/start.png)
+![Breather start screen with microphone selection, API setup, and a demo option](docs/images/start.png)
 
 *Start with a demo, or connect speech recognition and an AI provider for a live meeting.*
 
+## Languages
+
+English and Russian cover navigation, setup, settings, hints, history controls, usage labels, error messages, and the mini window. Dates, numbers, and plural forms follow the selected interface language. Demo dialogue and prepared hints are localized as well.
+
+New meetings use the selected interface language for generated hints and summaries. Changing the interface during a meeting updates controls immediately; the meeting keeps the output language chosen at creation. Original transcript text, uploaded documents, custom participant names, and saved content keep their original language.
+
+**Interface language and speech recognition language are separate.** Recognition defaults to automatic multilingual mode; the speech settings also offer an explicit Russian option. Switching the interface does not change your speech provider, reconnect the microphone, or submit API settings.
+
+To add an interface language, extend `src/i18n.ts` and provide a complete catalog alongside `src/locales/en.json`. The Russian source strings serve as the fallback catalog.
+
 ## Your first live meeting
 
-1. Select **“Подключить API” (Connect APIs)**. Choose Deepgram or ElevenLabs and enter its speech API key and your generation API key. Defaults: OpenAI Responses, `https://api.openai.com/v1`, and `gpt-6-luna`. Expand the model/API section to change them. Select **“Проверить и сохранить” (Test and save)** to return to the launcher. This checks generation connectivity; speech connectivity is checked when recognition starts.
-2. Optionally add a text-layer PDF, TXT, or Markdown file under **“Документы” (Documents)** and wait for indexing. Text files must be UTF-8. Uploads are limited to 20 MB; PDFs to 500 pages. Scanned PDFs require external OCR.
-3. Optionally expand **“Добавить вводные и материалы” (Add context and materials)** to set your goal, role, familiarity with the topic, and selected documents.
-4. Choose a microphone and select **“Начать встречу” (Start meeting)**. Allow microphone access in Chrome. If macOS blocks it, enable Chrome under System Settings → Privacy & Security → Microphone.
-5. With Deepgram, select a speaker name to rename it or mark **“Это я” (This is me)**. Names are assigned manually. After speech reconnects, speakers receive new labels; check them again.
-6. **“Пауза” (Pause)** turns off the microphone; **“Продолжить” (Resume)** reconnects it. **“Завершить” (Finish)** saves the meeting to history and releases audio devices.
+1. Select **Connect APIs**. Choose Deepgram or ElevenLabs and enter its speech API key and your generation API key. Defaults: OpenAI Responses, `https://api.openai.com/v1`, and `gpt-6-luna`. Expand the model/API section to change them. Select **Test and save** to return to the launcher. This checks generation connectivity; speech connectivity is checked when recognition starts.
+2. Optionally add a text-layer PDF, TXT, or Markdown file under **Documents** and wait for indexing. Text files must be UTF-8. Uploads are limited to 20 MB; PDFs to 500 pages. Scanned PDFs require external OCR.
+3. Optionally expand **Add context and materials** to set your goal, role, familiarity with the topic, and selected documents.
+4. Choose a microphone and select **Start meeting**. Allow microphone access in Chrome. If macOS blocks it, enable Chrome under System Settings → Privacy & Security → Microphone.
+5. With Deepgram, select a speaker name to rename it or mark **This is me**. Names are assigned manually. After speech reconnects, speakers receive new labels; check them again.
+6. **Pause** turns off the microphone; **Resume** reconnects it. **Finish** saves the meeting to history and releases audio devices.
 
-ElevenLabs uses Scribe v2 Realtime and shows a single **“Разговор” (Conversation)** feed, without speaker separation or a “This is me” marker. Create its key under Developers → API Keys with Speech to Text access. To change the speech provider or its key during a meeting, pause, save the settings, and resume.
+ElevenLabs uses Scribe v2 Realtime and shows a single **Conversation** feed, without speaker separation or a “This is me” marker. Create its key under Developers → API Keys with Speech to Text access. To change the speech provider or its key during a meeting, pause, save the settings, and resume.
 
-Transcription continues during generation and retrieval. Partial text updates in place. Scroll upward to read older turns without automatic scrolling; **“К новым репликам” (Jump to latest)** restores following.
+Transcription continues during generation and retrieval. Partial text updates in place. Scroll upward to read older turns without automatic scrolling; **Jump to latest** restores following.
 
-The hints panel shows up to three current or pinned hints. Earlier hints are available in an expandable archive. Expand sources to inspect the passages used; document links open the corresponding excerpt. **“Возможный вопрос” (Possible question)** is a model prediction. **“Предварительно” (Preliminary)** means the answer has not been confirmed by sources.
+The hints panel shows up to three current or pinned hints. Earlier hints are available in an expandable archive. Expand sources to inspect the passages used; document links open the corresponding excerpt. **Possible question** is a model prediction. **Preliminary** means the answer has not been confirmed by sources.
 
 ## How it works
 
@@ -77,21 +87,28 @@ The browser captures mono PCM16 audio, resamples it to 24 kHz, and sends 100 ms 
 
 ## Compact workspace and mini mode
 
-The meeting header stays compact so the live feeds can use most of the window height. **“Контекст” (Context)** opens the goal, summary, and usage panel. On mobile layouts, hints appear before the transcript. Select the microphone icon to choose an audio device; device changes require pausing.
+The meeting header stays compact so the live feeds can use most of the window height. **Context** opens the goal, summary, and usage panel. On mobile layouts, hints appear before the transcript. Select the microphone icon to choose an audio device; device changes require pausing.
 
-<img src="docs/images/mini.png" alt="Sufler mini window showing a contextual hint, pin control, and pause button" width="420">
+<img src="docs/images/mini.png" alt="Breather mini window showing a contextual hint, pin control, and pause button" width="420">
 
-*Mini mode showing the same demo hint. This screenshot uses the ordinary popup fallback.*
+*Mini mode showing the same English demo hint. This screenshot uses the ordinary popup fallback.*
 
-Desktop Chrome uses Document Picture-in-Picture for a window that stays above other applications. If the API is unavailable, Sufler opens an ordinary popup, without an always-on-top guarantee. If PiP fails, a button offers the ordinary window. Allow popups if your browser blocks them. The embedded Codex browser may support only the ordinary window; use desktop Chrome for the floating mode.
+Desktop Chrome uses Document Picture-in-Picture for a window that stays above other applications. If the API is unavailable, Breather opens an ordinary popup, without an always-on-top guarantee. If PiP fails, a button offers the ordinary window. Allow popups if your browser blocks them. The embedded Codex browser may support only the ordinary window; use desktop Chrome for the floating mode.
 
 The mini window is a React portal into a same-origin document. It shares the existing meeting, WebSocket, microphone, and generation flow. Pinning, sources, and pause controls operate on that meeting. You can minimize the main window, but its tab must stay open; closing it also closes the mini window.
+
+<details>
+<summary>Mobile workspace</summary>
+
+<img src="docs/images/mobile.png" alt="Breather mobile workspace in English, with hints before the transcript" width="390">
+
+</details>
 
 ## Models, documents, and search
 
 **OpenAI Responses** and **OpenAI-compatible Chat Completions** have independent adapters. For a compatible provider, enter its `baseURL`, model ID, and key. URLs must use HTTPS; local models may use HTTP on `localhost` or `127.0.0.1`. The provider must return a valid stream for the selected protocol. Changing the address requires a new key so an existing key is not forwarded to another server.
 
-You can save generation settings during a meeting. Sufler first makes a small test request. If it succeeds, the old generation is canceled and the new model receives the current context while transcription continues. Invalid keys, limits, and connection errors leave the working settings intact.
+You can save generation settings during a meeting. Breather first makes a small test request. If it succeeds, the old generation is canceled and the new model receives the current context while transcription continues. Invalid keys, limits, and connection errors leave the working settings intact.
 
 Embeddings are configured separately and default to `text-embedding-3-small`. Without a separate key, the configured OpenAI key is used. Changing the hint model does not require reindexing. If you change the **embedding model or endpoint**, upload the materials again: vectors with a different identifier are not used. Without embeddings, SQLite FTS5 provides keyword search without Russian morphology.
 
@@ -99,7 +116,7 @@ Tavily is optional. External facts are searched through a separate public query 
 
 ## Meeting memory and spending
 
-The **“Фокус встречи” (Meeting focus)** section, available through Context, stores questions, topics, and decisions with links to finalized transcript turns. Mark a question as answered; that manual status persists through later updates. You can edit the goal during the meeting to guide concrete next steps.
+The **Meeting focus** section, available through Context, stores questions, topics, and decisions with links to finalized transcript turns. Mark a question as answered; that manual status persists through later updates. You can edit the goal during the meeting to guide concrete next steps.
 
 Earlier items remain when the topic changes. The rolling summary and open questions supplement the last two minutes of transcript used for hints. Summaries are model interpretations: evidence links confirm that a turn exists, not that the interpretation is correct. Paraphrased items may be duplicated.
 
@@ -115,7 +132,7 @@ Silence is not automatically removed from the audio stream, and the speech model
 
 - **Local server:** binds to `127.0.0.1` and validates Host and Origin. Mutating HTTP requests and WebSockets are accepted only from the app interface. One tab owns a meeting at a time.
 - **Keys:** stored in `.env.local` with `0600` permissions. The public API exposes only whether keys are configured. Keys are excluded from client builds and logs. Environment variables take precedence over file settings; see [.env.example](.env.example).
-- **Storage:** history, document text, vectors, hints, source excerpts, and measurements live in `data/sufler.sqlite` until removed through the interface. For backup or migration, stop the server and copy `data`; copy keys separately.
+- **Storage:** history, document text, vectors, hints, source excerpts, and measurements live in `data/sufler.sqlite` until removed through the interface. For backup or migration, stop the server and copy `data`; copy keys separately. The legacy `sufler.sqlite` filename and `SUFLER_NODE_BIN` environment variable are retained for compatibility with existing installations.
 - **Audio and uploads:** raw audio stays in memory and is sent to the selected speech service. Audio files and original uploaded documents are not written to disk. Extracted document text is stored in SQLite.
 - **Cloud processing:** Deepgram or ElevenLabs receives audio; the selected generation model receives meeting context and the passages used; the embedding API receives indexed document text. Storage is local; these processing steps use cloud APIs.
 - **Interruptions:** old audio is not queued after a speech outage, and missing segments are marked in the transcript. Closing the tab pauses the stream. After a server restart, unfinished meetings open as completed; text remains saved and the microphone stays off.
@@ -155,9 +172,15 @@ npm test
 npm run test:e2e
 ```
 
+To regenerate the English README screenshots from the actual demo UI:
+
+```sh
+BREATHER_CAPTURE_README=1 npm run test:e2e -- tests/browser/i18n.spec.ts
+```
+
 Playwright uses installed Google Chrome and two isolated local servers with test providers. Tests require no API keys or paid cloud requests.
 
-The current version passed **31 Vitest tests and 10 Playwright scenarios**. Coverage includes both generation protocols, cancellation, speaker identifiers, partial-turn corrections, persistence and key permissions, PDF/Markdown/TXT handling and OCR errors, real AudioWorklet/getUserMedia with a synthetic Chrome microphone, pause/device release, documents/history, mobile widths, and mini-window behavior.
+The current version passed **33 Vitest tests and 12 Playwright scenarios**. Coverage includes both generation protocols, cancellation, speaker identifiers, partial-turn corrections, persistence and key permissions, PDF/Markdown/TXT handling and OCR errors, real AudioWorklet/getUserMedia with a synthetic Chrome microphone, pause/device release, documents/history, mobile widths, mini-window behavior, persistent language switching, and localized errors.
 
 An accelerated one-hour simulation sends 36,000 audio packets and 1,200 turns while the model is busy. This is a simulation, not a one-hour field trial. See [VERIFICATION.md](VERIFICATION.md) for the detailed verification log in Russian.
 

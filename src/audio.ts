@@ -1,8 +1,9 @@
+import { t } from './i18n';
 export class Microphone {
   private stream?: MediaStream; private context?: AudioContext; private node?: AudioWorkletNode; private stopped = false;
   async start(deviceId: string, send: (audio: ArrayBuffer, capturedAt: number) => void, level: (value: number) => void, lost: () => void) {
     this.stopped = false;
-    if (!navigator.mediaDevices?.getUserMedia) throw new Error('Для микрофона откройте приложение в Chrome по локальному адресу.');
+    if (!navigator.mediaDevices?.getUserMedia) throw new Error(t("Для микрофона откройте приложение в Chrome по локальному адресу."));
     const stream = await navigator.mediaDevices.getUserMedia({ video: false, audio: { ...(deviceId ? { deviceId: { exact: deviceId } } : {}), echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 } });
     if (this.stopped) { stream.getTracks().forEach(track => track.stop()); return; }
     this.stream = stream;

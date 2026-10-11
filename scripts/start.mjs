@@ -8,7 +8,7 @@ const candidates = [process.env.SUFLER_NODE_BIN, process.execPath, join(homedir(
 const nvmRoot = join(homedir(), '.nvm/versions/node');
 if (existsSync(nvmRoot)) for (const version of readdirSync(nvmRoot).filter(v => /^v24\./.test(v)).sort().reverse()) candidates.push(join(nvmRoot, version, 'bin/node'));
 const node = candidates.find(candidate => { if (!existsSync(candidate)) return false; const result = spawnSync(candidate, ['--version'], { encoding: 'utf8' }); return result.status === 0 && Number(result.stdout.trim().match(/^v(\d+)/)?.[1]) >= 24; });
-if (!node) { console.error('Для Суфлёра нужен Node.js 24 LTS. Установите его и снова выполните npm start.'); process.exit(1); }
+if (!node) { console.error('Breather requires Node.js 24 LTS. Install it and run npm start again.'); process.exit(1); }
 const env = { ...process.env, PATH: dirname(node) + ':' + process.env.PATH };
 const npm = process.env.npm_execpath || join(dirname(node), '../lib/node_modules/npm/bin/npm-cli.js');
 const execute = args => { const result = spawnSync(node, [npm, ...args], { cwd: root, env, stdio: 'inherit' }); if (result.status !== 0) process.exit(result.status || 1); };

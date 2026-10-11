@@ -1,5 +1,5 @@
 ---
-name: Суфлёр
+name: Breather
 description: Спокойный рабочий интерфейс рядом с очным разговором
 colors:
   brand: "#c64d35"
@@ -183,15 +183,15 @@ components:
     rounded: "{rounded.panel}"
 ---
 
-# Design System: Суфлёр
+# Design System: Breather
 
 ## Overview
 
 **Creative North Star: "Рядом с разговором"**
 
-Суфлёр сопровождает очный разговор: тёплая бумага, тёмные зелёные чернила и компактные рабочие элементы помогают читать короткими взглядами. Вермилионовый знак — две встречные речевые ленты, складывающиеся в S, — связывает название с диалогом. Основные действия сохраняют спокойный зелёный цвет.
+Breather сопровождает очный разговор: тёплая бумага, тёмные зелёные чернила и компактные рабочие элементы помогают читать короткими взглядами. Вермилионовый знак — две встречные речевые ленты, образующие знак диалога, — связывает продукт с разговором. Основные действия сохраняют спокойный зелёный цвет.
 
-Система зафиксирована по `src/style.css`, `src/main.tsx` и `index.html`. Знак хранится в `public/brand/sufler-symbol.png`, используется в шапке, на экране запуска и как favicon/apple-touch-icon. Композиция встречи и её режим записаны отдельно в `.impeccable/meeting.surface.md`; обновление идентичности сохраняет рабочую структуру встречи. Имена токенов frontmatter — извлечённые роли, а не обязательные названия CSS custom properties.
+Система зафиксирована по `src/style.css`, `src/main.tsx` и `index.html`. Знак хранится в `public/brand/breather-symbol.png`, используется в шапке, на экране запуска и как favicon/apple-touch-icon. Композиция встречи и её режим записаны отдельно в `.impeccable/meeting.surface.md`; обновление идентичности сохраняет рабочую структуру встречи. Имена токенов frontmatter — извлечённые роли, а не обязательные названия CSS custom properties.
 
 **Key Characteristics:**
 - Тёплые светлые плоскости, тонкие границы и отсутствие теней.
@@ -231,7 +231,7 @@ components:
 
 ### Hierarchy
 - **Display**: заголовок запуска, `clamp(46px, 4.7vw, 68px)`, weight 570, line-height 1.06; до 900 px — 54 px, до 680 px — 46 px/1.08, до 440 px — 43 px.
-- **Wordmark**: строчное «суфлёр», 27 px/1.1, weight 680; до 680 px — 24 px. Подпись «рядом с разговором» — 10 px, на мобильном 9 px.
+- **Wordmark**: строчное «breather», 27 px/1.1, weight 680; до 680 px — 24 px. Подпись «рядом с разговором» — 10 px, на мобильном 9 px.
 - **Headline**: название страницы; роль `headline`, на ширине до 1100 px уменьшается до (24 px).
 - **Title**: заголовок подсказки; роль `title`. Заголовки разделов настроек используют `section-title`, заголовки панелей — `panel-title`.
 - **Body**: реплика; роль `body`, ограничение строки (70 ch), `overflow-wrap: anywhere`. До 850 px размер реплики становится (13 px). Текст просмотрщика документа сохраняет (14 px), line-height (1.8), предел (75 ch).
@@ -339,3 +339,7 @@ Phosphor используется как настоящая SVG-библиоте
 - **Don't** Автоматически прокручивайте ленту, когда пользователь читает старые реплики.
 - **Don't** Превращайте маленькие метаданные в основной текст ответа или добавляйте тени к плоским рабочим панелям.
 - **Don't** Переносите демонстрационные p50/p95 в обещание скорости живой встречи.
+
+## Localization — October 11, 2026
+
+The wordmark is lowercase `breather`. Preserve the existing conversation symbol and palette. A compact English / Русский selector is always available in the header. On mobile, it wraps without widening the viewport; in the workspace, navigation uses labeled icon buttons. Language changes preserve form input and update mini-window labels and document language. English and Russian copy use the same hierarchy and responsive layout.

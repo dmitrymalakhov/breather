@@ -3,6 +3,7 @@ test('real AudioWorklet transports PCM and stops all microphone tracks', async (
   const context = await browser.newContext({ permissions: ['microphone'] });
   const page = await context.newPage();
   await page.addInitScript(() => {
+    localStorage.setItem('breather.language', 'ru');
     const original = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
     (window as any).__tracks = [];
     navigator.mediaDevices.getUserMedia = async constraints => { const stream = await original(constraints); (window as any).__tracks.push(...stream.getTracks()); return stream; };

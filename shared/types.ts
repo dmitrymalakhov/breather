@@ -5,7 +5,7 @@ export interface BillingRates { deepgramHour: number; elevenlabsHour: number; in
 export interface SpeechOptions { language: 'auto' | 'ru'; silenceMs: number }
 export interface Config { billing: BillingRates; speechOptions: SpeechOptions; generation: ModelConfig; speechProvider: SpeechService; elevenlabsKey: string; deepgramKey: string; tavilyKey: string; embedding: { baseURL: string; model: string; apiKey: string }; port: number }
 export interface PublicConfig { billing: BillingRates; speechOptions: SpeechOptions; speechProvider: SpeechService; hasElevenlabsKey: boolean; generation: Omit<ModelConfig, 'apiKey'>; hasGenerationKey: boolean; hasDeepgramKey: boolean; hasTavilyKey: boolean; embedding: { baseURL: string; model: string; hasKey: boolean } }
-export interface Brief { title: string; goal: string; role: string; preparation: string; documents: string[] }
+export interface Brief { language?: 'en' | 'ru'; title: string; goal: string; role: string; preparation: string; documents: string[] }
 export type MeetingStatus = 'active' | 'paused' | 'ended';
 export interface Meeting { id: string; brief: Brief; demo: boolean; status: MeetingStatus; createdAt: number; endedAt?: number; summary: string; memory?: MeetingMemory; memoryThrough?: string }
 export interface Utterance { id: string; meetingId: string; speakerId: string; text: string; start: number; end: number; final: boolean; receivedAt: number; gap?: boolean; sttLatencyMs?: number }

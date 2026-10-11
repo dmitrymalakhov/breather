@@ -59,3 +59,16 @@ it('records cancellation without inventing missing usage',async()=>{
  await expect(collect(new ApiGenerator(config,observeModel(store,config,rates,null)),[{role:'user',content:'t'}],abort.signal,'test')).rejects.toThrow();
  expect(store.usageTotals()).toMatchObject({modelRequests:1,cancelled:1,unknownTokens:1,pending:0});
 });
+
+it.each(['en', 'ru'] as const)('persists %s output language and passes it to summary generation', async language => {
+  const { store, settings } = fixture();
+  const meeting: Meeting = { id: 'language-meeting', brief: { title: 'Meeting', goal: '', role: '', preparation: '', documents: [], language }, demo: false, status: 'paused', createdAt: 1, summary: '' };
+  store.meeting(meeting);
+  const instructions: string[] = [];
+  const generator: Generator = { async *stream(messages) { instructions.push(messages[0].content); yield JSON.stringify({ summary: 'Summary', items: [] }); } };
+  const session = new Session(meeting, store, settings, new Documents(store, settings), { generator: () => generator }); sessions.push(session);
+  session.ingest('language-turn', [{ ...utterance('language-turn:0', 'What is next?'), meetingId: meeting.id }]);
+  await session.refreshMemory(true);
+  expect(store.getMeeting(meeting.id)?.brief.language).toBe(language);
+  expect(instructions[0]).toContain(language === 'en' ? 'in English' : 'по-русски');
+});

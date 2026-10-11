@@ -14,7 +14,7 @@ import { ApiGenerator, collect, friendlyError } from './ai.js';
 import { Session, type SessionDependencies } from './session.js';
 import type { Meeting, Snapshot, Config } from '../shared/types.js';
 
-export const briefSchema = z.object({ title: z.string().trim().max(120).default('Новая встреча'), goal: z.string().max(3000).default(''), role: z.string().max(1000).default(''), preparation: z.string().max(1000).default(''), documents: z.array(z.string().uuid()).max(30).default([]) });
+export const briefSchema = z.object({ language: z.enum(['en', 'ru']).optional(), title: z.string().trim().max(120).default('Новая встреча'), goal: z.string().max(3000).default(''), role: z.string().max(1000).default(''), preparation: z.string().max(1000).default(''), documents: z.array(z.string().uuid()).max(30).default([]) });
 export interface AppOptions { root: string; database?: string; config?: Partial<Config>; dependencies?: SessionDependencies; serveStatic?: boolean }
 export async function createApp(options: AppOptions) {
   const settings = new Settings(options.root, options.config);
