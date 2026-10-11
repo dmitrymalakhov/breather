@@ -1,0 +1,21 @@
+import { existsSync, readdirSync } from 'node:fs';
+import { homedir } from 'node:os';
+import { dirname, join, resolve } from 'node:path';
+import { spawnSync, spawn } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const candidates = [process.env.SUFLER_NODE_BIN, process.execPath, join(homedir(), '.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node')].filter(Boolean);
+const nvmRoot = join(homedir(), '.nvm/versions/node');
+if (existsSync(nvmRoot)) for (const version of readdirSync(nvmRoot).filter(v => /^v24\./.test(v)).sort().reverse()) candidates.push(join(nvmRoot, version, 'bin/node'));
+const node = candidates.find(candidate => { if (!existsSync(candidate)) return false; const result = spawnSync(candidate, ['--version'], { encoding: 'utf8' }); return result.status === 0 && Number(result.stdout.trim().match(/^v(\d+)/)?.[1]) >= 24; });
+if (!node) { console.error('Для Суфлёра нужен Node.js 24 LTS. Установите его и снова выполните npm start.'); process.exit(1); }
+const env = { ...process.env, PATH: dirname(node) + ':' + process.env.PATH };
+const npm = process.env.npm_execpath || join(dirname(node), '../lib/node_modules/npm/bin/npm-cli.js');
+const execute = args => { const result = spawnSync(node, [npm, ...args], { cwd: root, env, stdio: 'inherit' }); if (result.status !== 0) process.exit(result.status || 1); };
+if (!existsSync(join(root, 'node_modules'))) execute(['ci', '--no-audit', '--no-fund']);
+const native = spawnSync(node, ['--input-type=module', '-e', "import Database from 'better-sqlite3'; const db = new Database(':memory:'); db.close();"], { cwd: root, env, stdio: 'ignore' });
+if (native.status !== 0) execute(['rebuild', 'better-sqlite3']);
+execute(['run', 'build']);
+const child = spawn(node, ['dist-server/server/index.js'], { cwd: root, env, stdio: 'inherit' });
+for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => child.kill(signal));
+child.on('exit', code => process.exit(code ?? 0));

@@ -1,0 +1,30 @@
+import { test, expect } from '@playwright/test';
+test('real AudioWorklet transports PCM and stops all microphone tracks', async ({ browser }) => {
+  const context = await browser.newContext({ permissions: ['microphone'] });
+  const page = await context.newPage();
+  await page.addInitScript(() => {
+    const original = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+    (window as any).__tracks = [];
+    navigator.mediaDevices.getUserMedia = async constraints => { const stream = await original(constraints); (window as any).__tracks.push(...stream.getTracks()); return stream; };
+  });
+  await page.goto('http://127.0.0.1:4318');
+  await page.getByRole('button', { name: 'Начать встречу', exact: true }).click();
+  await expect(page.getByText('Это контрольная реплика из потока микрофона.', { exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Контрольная подсказка', exact: true })).toBeVisible();
+  const stats = await page.evaluate(() => fetch('/test/stats').then(r => r.json()));
+  expect(stats.frames).toBeGreaterThan(4); expect(stats.bytes / stats.frames).toBe(4800); expect(stats.models).toBeGreaterThan(0);
+  await page.getByRole('button',{name:'Мини-режим',exact:true}).click();
+  await expect.poll(()=>page.evaluate(()=>!!(window as any).documentPictureInPicture?.window?.document.querySelector('.mini-panel'))).toBe(true);
+  expect(await page.evaluate(()=>(window as any).__tracks.length)).toBe(1);
+  await page.evaluate(()=>(window as any).documentPictureInPicture.window.close());
+  expect(await page.evaluate(()=>(window as any).__tracks.every((t:MediaStreamTrack)=>t.readyState==='live'))).toBe(true);
+  await page.getByRole('button', { name: 'Пауза', exact: true }).click();
+  await expect(page.getByText('На паузе', { exact: true })).toBeVisible();
+  expect(await page.evaluate(() => (window as any).__tracks.length > 0 && (window as any).__tracks.every((t: MediaStreamTrack) => t.readyState === 'ended'))).toBe(true);
+  const paused = await page.evaluate(() => fetch('/test/stats').then(r => r.json()));
+  await page.waitForTimeout(400);
+  expect((await page.evaluate(() => fetch('/test/stats').then(r => r.json()))).frames).toBe(paused.frames);
+  await page.getByRole('button', { name: 'Завершить', exact: true }).click();
+  await expect(page.getByText('Встреча завершена', { exact: true })).toBeVisible();
+  await context.close();
+});

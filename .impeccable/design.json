@@ -1,0 +1,459 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-11T15:26:58.085194+00:00",
+  "title": "Design System: Суфлёр",
+  "extensions": {
+    "colorMeta": {
+      "accent": {
+        "role": "primary",
+        "displayName": "Глубокий зелёный"
+      },
+      "accent-light": {
+        "role": "primary",
+        "displayName": "Светлый зелёный"
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "Глубокий зелёный"
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Зелёные чернила"
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Сдержанный серый"
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "Тёплая бумага"
+      },
+      "sidebar": {
+        "role": "neutral",
+        "displayName": "Боковая плоскость",
+        "tonalRamp": [
+          "oklch(15.000% 0.003482 219.533)",
+          "oklch(26.429% 0.003482 219.533)",
+          "oklch(37.857% 0.003482 219.533)",
+          "oklch(49.286% 0.003482 219.533)",
+          "oklch(60.714% 0.003482 219.533)",
+          "oklch(72.143% 0.003482 219.533)",
+          "oklch(83.571% 0.003482 219.533)",
+          "oklch(95.000% 0.003482 219.533)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Светлая бумага"
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Тонкая граница"
+      },
+      "nav-text": {
+        "role": "neutral",
+        "displayName": "Текст навигации"
+      },
+      "nav-hover": {
+        "role": "neutral",
+        "displayName": "Наведение в навигации"
+      },
+      "nav-selected": {
+        "role": "primary",
+        "displayName": "Выбранный раздел"
+      },
+      "nav-selected-text": {
+        "role": "primary",
+        "displayName": "Текст выбранного раздела"
+      },
+      "field-text": {
+        "role": "neutral",
+        "displayName": "Текст поля"
+      },
+      "field-line": {
+        "role": "neutral",
+        "displayName": "Граница поля"
+      },
+      "field-focus": {
+        "role": "primary",
+        "displayName": "Фокус поля"
+      },
+      "field-placeholder": {
+        "role": "neutral",
+        "displayName": "Пример в поле"
+      },
+      "secondary-text": {
+        "role": "neutral",
+        "displayName": "Вторичное действие"
+      },
+      "secondary-line": {
+        "role": "neutral",
+        "displayName": "Граница вторичного действия"
+      },
+      "secondary-hover": {
+        "role": "neutral",
+        "displayName": "Наведение на вторичное действие"
+      },
+      "stop-background": {
+        "role": "neutral",
+        "displayName": "Завершение · фон"
+      },
+      "stop-text": {
+        "role": "neutral",
+        "displayName": "Завершение · текст"
+      },
+      "stop-hover": {
+        "role": "neutral",
+        "displayName": "Завершение · наведение"
+      },
+      "icon-text": {
+        "role": "neutral",
+        "displayName": "Иконное действие",
+        "tonalRamp": [
+          "oklch(15.000% 0.020658 222.326)",
+          "oklch(26.429% 0.020658 222.326)",
+          "oklch(37.857% 0.020658 222.326)",
+          "oklch(49.286% 0.020658 222.326)",
+          "oklch(60.714% 0.020658 222.326)",
+          "oklch(72.143% 0.020658 222.326)",
+          "oklch(83.571% 0.020658 222.326)",
+          "oklch(95.000% 0.020658 222.326)"
+        ]
+      },
+      "icon-hover": {
+        "role": "neutral",
+        "displayName": "Наведение на иконку",
+        "tonalRamp": [
+          "oklch(15.000% 0.007515 164.935)",
+          "oklch(26.429% 0.007515 164.935)",
+          "oklch(37.857% 0.007515 164.935)",
+          "oklch(49.286% 0.007515 164.935)",
+          "oklch(60.714% 0.007515 164.935)",
+          "oklch(72.143% 0.007515 164.935)",
+          "oklch(83.571% 0.007515 164.935)",
+          "oklch(95.000% 0.007515 164.935)"
+        ]
+      },
+      "hint-line": {
+        "role": "neutral",
+        "displayName": "Граница подсказки"
+      },
+      "pinned-line": {
+        "role": "primary",
+        "displayName": "Закреплённая подсказка"
+      },
+      "transcript-text": {
+        "role": "neutral",
+        "displayName": "Текст разговора"
+      },
+      "hint-text": {
+        "role": "neutral",
+        "displayName": "Текст подсказки"
+      },
+      "demo-background": {
+        "role": "neutral",
+        "displayName": "Демонстрация · фон"
+      },
+      "demo-text": {
+        "role": "neutral",
+        "displayName": "Демонстрация · текст"
+      },
+      "error-background": {
+        "role": "neutral",
+        "displayName": "Ошибка · фон",
+        "tonalRamp": [
+          "oklch(15.000% 0.014608 44.182)",
+          "oklch(26.429% 0.014608 44.182)",
+          "oklch(37.857% 0.014608 44.182)",
+          "oklch(49.286% 0.014608 44.182)",
+          "oklch(60.714% 0.014608 44.182)",
+          "oklch(72.143% 0.014608 44.182)",
+          "oklch(83.571% 0.014608 44.182)",
+          "oklch(95.000% 0.014608 44.182)"
+        ]
+      },
+      "error-text": {
+        "role": "neutral",
+        "displayName": "Ошибка · текст",
+        "tonalRamp": [
+          "oklch(15.000% 0.103032 35.986)",
+          "oklch(26.429% 0.103032 35.986)",
+          "oklch(37.857% 0.103032 35.986)",
+          "oklch(49.286% 0.103032 35.986)",
+          "oklch(60.714% 0.103032 35.986)",
+          "oklch(72.143% 0.103032 35.986)",
+          "oklch(83.571% 0.103032 35.986)",
+          "oklch(95.000% 0.103032 35.986)"
+        ]
+      },
+      "brand": {
+        "role": "secondary",
+        "displayName": "Вермилион"
+      },
+      "pinned-background": {
+        "role": "neutral",
+        "displayName": "Закреплённая бумага"
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Название страницы",
+        "purpose": "Главный заголовок текущей рабочей страницы; на ширине до 1100 px уменьшается до 24 px."
+      },
+      "title": {
+        "displayName": "Заголовок подсказки",
+        "purpose": "Короткая мысль в карточке подсказки."
+      },
+      "section-title": {
+        "displayName": "Раздел настроек",
+        "purpose": "Название подключения в настройках API."
+      },
+      "panel-title": {
+        "displayName": "Заголовок панели",
+        "purpose": "Названия разговора и подсказок."
+      },
+      "body": {
+        "displayName": "Реплика",
+        "purpose": "Основной текст разговора с пределом 70 ch; до 850 px размер 13 px."
+      },
+      "hint-body": {
+        "displayName": "Текст подсказки",
+        "purpose": "Основной текст короткого ответа с сохранением переносов."
+      },
+      "input": {
+        "displayName": "Текст поля",
+        "purpose": "Значение поля и select."
+      },
+      "button": {
+        "displayName": "Действие",
+        "purpose": "Кнопки управления встречей и сохранения; до 680 px размер 11 px."
+      },
+      "field-label": {
+        "displayName": "Подпись поля",
+        "purpose": "Видимый label над полем."
+      },
+      "label": {
+        "displayName": "Служебная подпись",
+        "purpose": "Статус, тип подсказки и короткие вторичные подписи."
+      },
+      "metadata": {
+        "displayName": "Метаданные",
+        "purpose": "Время, этап подсказки, краткие технические сведения; tabular-nums задаётся соответствующими компонентами."
+      },
+      "display": {
+        "displayName": "Display",
+        "purpose": "Крупный заголовок запуска: desktop 46–68 px, mobile 43–46 px."
+      },
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "Строчное название в шапке с подписью «рядом с разговором»."
+      }
+    },
+    "shadows": [
+      {
+        "name": "working-context-overlay",
+        "value": "0 12px 32px #233e3520",
+        "purpose": "Только фиксированный контекст поверх рабочей области до 1000 px; лента и ответы остаются плоскими."
+      },
+      {
+        "name": "working-device-menu",
+        "value": "0 8px 20px #233e3518",
+        "purpose": "Раскрытое меню микрофона над рабочей областью."
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-state",
+        "value": "background .15s ease, transform .15s ease",
+        "purpose": "Наведение и нажатие кнопки; нажатие сдвигает её на 1 px."
+      },
+      {
+        "name": "field-state",
+        "value": "border-color .15s ease",
+        "purpose": "Изменение границы поля."
+      },
+      {
+        "name": "hint-arrive",
+        "value": "arrive .2s cubic-bezier(.2,.7,.3,1)",
+        "purpose": "Новая карточка: opacity .8 → 1, translateY 4 px → 0; архив без анимации."
+      },
+      {
+        "name": "streaming-cursor",
+        "value": "blink 1s ease infinite",
+        "purpose": "Курсор потокового ответа; opacity .2 на 50%."
+      },
+      {
+        "name": "loading",
+        "value": "spin 1s linear infinite",
+        "purpose": "CircleNotch при проверке подключения."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation: none !important; transition: none !important; scroll-behavior: auto !important",
+        "purpose": "Все элементы и псевдоэлементы при prefers-reduced-motion: reduce."
+      },
+      {
+        "name": "brand-arrive",
+        "value": "brand-arrive .55s cubic-bezier(.16,1,.3,1)",
+        "purpose": "Запуск: translateY 8 px → 0, opacity .75 → 1, clip-path inset 6 px → 0; reduced motion отключает эффект."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide-min",
+        "value": "1500px"
+      },
+      {
+        "name": "compact-max",
+        "value": "1100px"
+      },
+      {
+        "name": "compact-content-max",
+        "value": "850px"
+      },
+      {
+        "name": "stacked-mobile-max",
+        "value": "680px"
+      },
+      {
+        "name": "launch-compact-max",
+        "value": "900px"
+      },
+      {
+        "name": "navigation-row-max",
+        "value": "440px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Основная кнопка",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Начало, продолжение или сохранение текущего действия.",
+      "html": "<button type=\"button\" class=\"ds-button-primary\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z\"/></svg>Продолжить</button>",
+      "css": ".ds-button-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:39px;padding:10px 14px;border-radius:8px;border:0;font-family:'Onest Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:12px;font-weight:550;white-space:nowrap;background:var(--accent,#244f40);color:var(--paper,#fffef9);cursor:pointer;transition:background .15s ease,transform .15s ease}.ds-button-primary:hover:not(:disabled){background:#183c30}.ds-button-primary:focus-visible{outline:2px solid var(--accent,#244f40);outline-offset:4px}.ds-button-primary:active:not(:disabled){transform:translateY(1px)}.ds-button-primary:disabled{opacity:.45;cursor:default}@media(max-width:680px){.ds-button-primary{font-size:11px;padding:10px 12px}}@media(prefers-reduced-motion:reduce){.ds-button-primary{transition:none!important}}"
+    },
+    {
+      "name": "Вторичная кнопка",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Пауза, открытие истории и спокойное вторичное действие.",
+      "html": "<button type=\"button\" class=\"ds-button-secondary\">Пауза</button>",
+      "css": ".ds-button-secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:39px;padding:10px 14px;border-radius:8px;border:1px solid #dce0d3;font-family:'Onest Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:12px;font-weight:550;white-space:nowrap;background:var(--paper,#fffef9);color:#455c4c;cursor:pointer;transition:background .15s ease,transform .15s ease}.ds-button-secondary:hover:not(:disabled){background:#eeefe7}.ds-button-secondary:focus-visible{outline:2px solid var(--accent,#244f40);outline-offset:4px}.ds-button-secondary:active:not(:disabled){transform:translateY(1px)}.ds-button-secondary:disabled{opacity:.45;cursor:default}@media(max-width:680px){.ds-button-secondary{font-size:11px;padding:10px 12px}}@media(prefers-reduced-motion:reduce){.ds-button-secondary{transition:none!important}}"
+    },
+    {
+      "name": "Завершение",
+      "kind": "button",
+      "refersTo": "button-stop",
+      "description": "Завершение активной встречи; в паузе приложение использует вторичную кнопку.",
+      "html": "<button type=\"button\" class=\"ds-button-stop\">Завершить</button>",
+      "css": ".ds-button-stop{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:39px;padding:10px 14px;border-radius:8px;border:0;font-family:'Onest Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:12px;font-weight:550;white-space:nowrap;background:#eeece4;color:#57604f;cursor:pointer;transition:background .15s ease,transform .15s ease}.ds-button-stop:hover:not(:disabled){background:#e1e0d4}.ds-button-stop:focus-visible{outline:2px solid var(--accent,#244f40);outline-offset:4px}.ds-button-stop:active:not(:disabled){transform:translateY(1px)}.ds-button-stop:disabled{opacity:.45;cursor:default}@media(max-width:680px){.ds-button-stop{font-size:11px;padding:10px 12px}}@media(prefers-reduced-motion:reduce){.ds-button-stop{transition:none!important}}"
+    },
+    {
+      "name": "Текстовое действие",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "Локальное действие без дополнительной заливки.",
+      "html": "<button type=\"button\" class=\"ds-button-text\">Открыть настройки</button>",
+      "css": ".ds-button-text{border:0;background:none;display:inline-flex;align-items:center;gap:5px;font-family:'Onest Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:12px;color:var(--accent,#244f40);padding:0;font-weight:500;cursor:pointer}.ds-button-text:focus-visible{outline:2px solid var(--accent,#244f40);outline-offset:4px}.ds-button-text:disabled{opacity:.45;cursor:default}"
+    },
+    {
+      "name": "Иконная кнопка",
+      "kind": "button",
+      "refersTo": "icon-button",
+      "description": "Закрепление, открытие или удаление с текстовым accessible name.",
+      "html": "<button type=\"button\" class=\"ds-icon-button\" aria-label=\"Закрепить подсказку\" aria-pressed=\"false\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M235.32,81.37,174.63,20.69a16,16,0,0,0-22.63,0L98.37,74.49c-10.66-3.34-35-7.37-60.4,13.14a16,16,0,0,0-1.29,23.78L85,159.71,42.34,202.34a8,8,0,0,0,11.32,11.32L96.29,171l48.29,48.29A16,16,0,0,0,155.9,224c.38,0,.75,0,1.13,0a15.93,15.93,0,0,0,11.64-6.33c19.64-26.1,17.75-47.32,13.19-60L235.33,104A16,16,0,0,0,235.32,81.37ZM224,92.69h0l-57.27,57.46a8,8,0,0,0-1.49,9.22c9.46,18.93-1.8,38.59-9.34,48.62L48,100.08c12.08-9.74,23.64-12.31,32.48-12.31A40.13,40.13,0,0,1,96.81,91a8,8,0,0,0,9.25-1.51L163.32,32,224,92.68Z\"/></svg></button>",
+      "css": ".ds-icon-button{border:0;background:transparent;padding:5px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;color:#7b8b91;cursor:pointer;font-family:'Onest Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.ds-icon-button:hover:not(:disabled){background:#eaf0ed;color:var(--accent,#244f40)}.ds-icon-button[aria-pressed=\"true\"]{color:var(--accent,#244f40)}.ds-icon-button:focus-visible{outline:2px solid var(--accent,#244f40);outline-offset:4px}.ds-icon-button:disabled{opacity:.45;cursor:default}"
+    },
+    {
+      "name": "Поле",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Видимый label и пример внутри поля.",
+      "html": "<label class=\"ds-field-label\">Ваша роль<input class=\"ds-input\" placeholder=\"Например, руководитель проекта\"/></label>",
+      "css": ".ds-field-label{display:flex;flex-direction:column;gap:8px;font-family:'Onest Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:12px;color:#465a65}.ds-input{border:1px solid #d7dacd;border-radius:7px;background:var(--paper,#fffef9);padding:10px 12px;min-width:0;width:100%;font-family:'Onest Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;color:#2f4439;caret-color:var(--accent,#244f40);transition:border-color .15s ease}.ds-input::placeholder{color:#697363}.ds-input:focus{outline:2px solid #cfddc5;outline-offset:1px;border-color:var(--accent,#244f40)}@media(prefers-reduced-motion:reduce){.ds-input{transition:none!important}}"
+    },
+    {
+      "name": "Навигация",
+      "kind": "nav",
+      "refersTo": "nav-item",
+      "description": "Текст и иконка; выбранное состояние является семантическим.",
+      "html": "<nav class=\"ds-navigation\" aria-label=\"Разделы приложения\"><button type=\"button\" class=\"ds-nav-item\" aria-current=\"page\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M128,176a48.05,48.05,0,0,0,48-48V64a48,48,0,0,0-96,0v64A48.05,48.05,0,0,0,128,176ZM96,64a32,32,0,0,1,64,0v64a32,32,0,0,1-64,0Zm40,143.6V240a8,8,0,0,1-16,0V207.6A80.11,80.11,0,0,1,48,128a8,8,0,0,1,16,0,64,64,0,0,0,128,0,8,8,0,0,1,16,0A80.11,80.11,0,0,1,136,207.6Z\"/></svg><span>Встреча</span></button></nav>",
+      "css": ".ds-navigation{display:flex;align-items:center;gap:8px;font-family:'Onest Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.ds-nav-item{border:0;background:transparent;display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 15px;border-radius:7px;font-size:13px;color:var(--muted,#636c60);cursor:pointer}.ds-nav-item:hover{background:#eeefe7;color:var(--accent,#244f40)}.ds-nav-item[aria-current=\"page\"]{background:var(--accent-light,#e7ece4);color:var(--accent,#244f40)}.ds-nav-item:focus-visible{outline:2px solid var(--accent,#244f40);outline-offset:4px}@media(max-width:680px){.ds-nav-item{font-size:12px;padding:10px 8px;gap:6px}}@media(max-width:440px){.ds-navigation{width:100%;justify-content:space-between}.ds-nav-item{flex:1}}"
+    },
+    {
+      "name": "Статус",
+      "kind": "chip",
+      "refersTo": "status-badge",
+      "description": "Неинтерактивная точка всегда сопровождается словами.",
+      "html": "<div role=\"status\" class=\"ds-status-badge\"><span class=\"ds-status-dot\"></span>На паузе</div>",
+      "css": ".ds-status-badge{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;font-family:'Onest Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:11px;color:#63717a;border:1px solid var(--line,#dedfd4);border-radius:20px;padding:7px 11px;background:var(--paper,#fffef9)}.ds-status-dot{width:5px;height:5px;background:#9aa9b0;border-radius:50%}.ds-status-badge.ds-is-live{background:var(--accent-light,#e7ece4);color:#165b4d;border-color:transparent}.ds-is-live .ds-status-dot{background:var(--accent,#244f40)}@media(max-width:850px){.ds-status-badge{font-size:10px}}@media(max-width:680px){.ds-status-badge{min-width:88px;max-width:108px;white-space:normal;line-height:1.4}}"
+    },
+    {
+      "name": "Подсказка",
+      "kind": "card",
+      "refersTo": "hint-card",
+      "description": "Тип, мысль, основной ответ и честная стадия. Основная мысль видна сразу; источники, прежние подсказки и метрики раскрываются по действию пользователя.",
+      "html": "<article class=\"ds-hint-card\"><div class=\"ds-hint-meta\"><span>Опора для ответа</span><button type=\"button\" class=\"ds-hint-pin\" aria-label=\"Закрепить подсказку\" aria-pressed=\"false\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M235.32,81.37,174.63,20.69a16,16,0,0,0-22.63,0L98.37,74.49c-10.66-3.34-35-7.37-60.4,13.14a16,16,0,0,0-1.29,23.78L85,159.71,42.34,202.34a8,8,0,0,0,11.32,11.32L96.29,171l48.29,48.29A16,16,0,0,0,155.9,224c.38,0,.75,0,1.13,0a15.93,15.93,0,0,0,11.64-6.33c19.64-26.1,17.75-47.32,13.19-60L235.33,104A16,16,0,0,0,235.32,81.37ZM224,92.69h0l-57.27,57.46a8,8,0,0,0-1.49,9.22c9.46,18.93-1.8,38.59-9.34,48.62L48,100.08c12.08-9.74,23.64-12.31,32.48-12.31A40.13,40.13,0,0,1,96.81,91a8,8,0,0,0,9.25-1.51L163.32,32,224,92.68Z\"/></svg></button></div><h3>Как сократить задержку?</h3><p>Передавать звук непрерывно и показывать короткий предварительный ответ. Поиск источников выполнять параллельно, чтобы он не останавливал ленту.</p><div class=\"ds-hint-stage\"><span class=\"ds-stage-dot\"></span>Предварительно</div></article>",
+      "css": ".ds-hint-card{background:var(--paper,#fffef9);border:1px solid #dedfd4;border-radius:var(--radius,14px);padding:20px 22px;font-family:'Onest Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#233e35;animation:ds-arrive .2s cubic-bezier(.2,.7,.3,1)}.ds-hint-card.ds-pinned{background:#f0f3e8;border-color:#bbc8aa}.ds-hint-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--accent,#244f40);font-size:11px;margin-bottom:12px}.ds-hint-pin{border:0;background:transparent;padding:5px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;color:#7b8b91;cursor:pointer}.ds-hint-pin:hover:not(:disabled){background:#eaf0ed;color:var(--accent,#244f40)}.ds-hint-pin[aria-pressed=\"true\"]{color:var(--accent,#244f40)}.ds-hint-pin:focus-visible{outline:2px solid var(--accent,#244f40);outline-offset:4px}.ds-hint-pin:disabled{opacity:.45;cursor:default}.ds-hint-card h3{font-size:17px;font-weight:580;letter-spacing:-.025em;line-height:1.4;margin:0 0 12px}.ds-hint-card>p{font-size:13px;line-height:1.8;color:#455849;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}.ds-hint-stage{display:flex;align-items:center;gap:6px;font-size:10px;line-height:1.5;color:var(--muted,#636c60);margin-top:16px}.ds-stage-dot{width:5px;height:5px;border-radius:50%;background:#a8b3b8;flex:none}.ds-stage-dot.ds-grounded{background:var(--accent,#244f40)}@keyframes ds-arrive{from{opacity:.8;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}@media(max-width:680px){.ds-hint-card{padding:18px}}@media(prefers-reduced-motion:reduce){.ds-hint-card{animation:none!important;transition:none!important}}"
+    },
+    {
+      "name": "Лента разговора",
+      "kind": "custom",
+      "refersTo": "transcript-panel",
+      "description": "Панель с читаемыми репликами, метками говорящих, временем и самостоятельной прокруткой.",
+      "html": "<section class=\"ds-transcript\"><div class=\"ds-panel-heading\"><h2>Разговор</h2><span>1 реплика</span></div><div class=\"ds-transcript-scroll\"><article class=\"ds-utterance\"><div class=\"ds-speaker-avatar\">Г</div><div class=\"ds-utterance-content\"><div class=\"ds-utterance-meta\"><button type=\"button\" class=\"ds-speaker-name\" title=\"Переименовать или отметить «Это я»\">Говорящий 1</button><time>00:00</time></div><p>Давайте обсудим помощника для встреч. Он должен слушать разговор и показывать текст сразу.</p></div></article></div><div class=\"ds-transcript-footer\"><span class=\"ds-quiet-dot\"></span>Аудио не сохраняется</div></section>",
+      "css": ".ds-transcript{border:1px solid var(--line,#dedfd4);border-radius:var(--radius,14px);background:var(--paper,#fffef9);min-width:0;display:flex;flex-direction:column;overflow:hidden;font-family:'Onest Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#233e35}.ds-panel-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:19px 21px;border-bottom:1px solid var(--line,#dedfd4)}.ds-panel-heading h2{font-size:14px;font-weight:580;letter-spacing:-.02em;margin:0}.ds-panel-heading>span{font-size:11px;color:var(--muted,#636c60)}.ds-transcript-scroll{height:calc(100dvh - 300px);min-height:340px;max-height:none;overflow:auto;overscroll-behavior:contain;padding:4px 21px 14px}.ds-utterance{display:flex;align-items:flex-start;gap:12px;padding:19px 0 11px}.ds-speaker-avatar{display:grid;place-items:center;flex:none;width:28px;height:28px;background:#e9ebdf;color:#526449;border-radius:9px;font-size:11px;font-weight:600;margin-top:1px}.ds-utterance:nth-child(even) .ds-speaker-avatar{background:#e9ebdf;color:#526449}.ds-utterance-content{min-width:0}.ds-utterance-meta{display:flex;align-items:center;gap:10px;min-height:25px;flex-wrap:wrap}.ds-speaker-name{border:0;background:none;padding:0;font-family:'Onest Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:12px;font-weight:600;color:var(--ink,#233e35);text-align:left;cursor:pointer}.ds-speaker-name:hover:not(:disabled){color:var(--accent,#244f40);text-decoration:underline;text-underline-offset:4px}.ds-speaker-name:focus-visible{outline:2px solid var(--accent,#244f40);outline-offset:4px}.ds-speaker-name:disabled{opacity:1;cursor:default}.ds-utterance time{font-size:10px;color:var(--muted,#636c60);font-variant-numeric:tabular-nums}.ds-utterance p{font-size:14px;line-height:1.75;margin:5px 0 0;color:#354b3e;overflow-wrap:anywhere;max-width:70ch}.ds-transcript-footer{display:flex;align-items:center;border-top:1px solid var(--line,#dedfd4);padding:13px 20px;font-size:11px;color:#75838b}.ds-quiet-dot{display:inline-block;flex:none;width:6px;height:6px;border-radius:50%;background:#a3b0b8;margin-right:7px}@media(max-width:850px){.ds-panel-heading{padding:16px}.ds-transcript-scroll{padding-left:16px;padding-right:16px}.ds-utterance p{font-size:13px}}@media(max-width:680px){.ds-transcript-scroll{height:380px;min-height:300px}}@media(prefers-reduced-motion:reduce){.ds-transcript *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}"
+    },
+    {
+      "name": "Мини-ответы",
+      "kind": "custom",
+      "description": "Мини-поверхность общей встречи: статус, время, пауза и текущие ответы. Пример показывает визуальный вариант; отдельное окно открывает приложение.",
+      "html": "<section class=\"ds-mini-panel\"><header class=\"ds-mini-header\"><strong>суфлёр</strong><button type=\"button\" class=\"ds-mini-back\" aria-label=\"Вернуться к встрече\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M14 3h7v7M21 3l-9 9M10 3H3v18h18v-7\"/></svg></button></header><div class=\"ds-mini-status\"><span role=\"status\">На паузе</span><time>03:24</time><button type=\"button\" class=\"ds-mini-resume\">Продолжить</button></div><div class=\"ds-mini-hints\"><article class=\"ds-hint-card ds-mini-hint\"><div class=\"ds-hint-meta\"><span>Опора для ответа</span><button type=\"button\" class=\"ds-hint-pin\" aria-label=\"Закрепить подсказку\" aria-pressed=\"false\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 256 256\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M235.32,81.37,174.63,20.69a16,16,0,0,0-22.63,0L98.37,74.49c-10.66-3.34-35-7.37-60.4,13.14a16,16,0,0,0-1.29,23.78L85,159.71,42.34,202.34a8,8,0,0,0,11.32,11.32L96.29,171l48.29,48.29A16,16,0,0,0,155.9,224c.38,0,.75,0,1.13,0a15.93,15.93,0,0,0,11.64-6.33c19.64-26.1,17.75-47.32,13.19-60L235.33,104A16,16,0,0,0,235.32,81.37ZM224,92.69h0l-57.27,57.46a8,8,0,0,0-1.49,9.22c9.46,18.93-1.8,38.59-9.34,48.62L48,100.08c12.08-9.74,23.64-12.31,32.48-12.31A40.13,40.13,0,0,1,96.81,91a8,8,0,0,0,9.25-1.51L163.32,32,224,92.68Z\"/></svg></button></div><h3>Как сократить задержку?</h3><p>Передавать звук непрерывно и показывать короткий предварительный ответ. Поиск источников выполнять параллельно, чтобы он не останавливал ленту.</p><div class=\"ds-hint-stage\"><span class=\"ds-stage-dot\"></span>Предварительно</div></article></div><footer>Ответы поверх других окон<span>Основная вкладка должна оставаться открытой.</span></footer></section>",
+      "css": ".ds-hint-card{background:var(--paper,#fffef9);border:1px solid #dedfd4;border-radius:var(--radius,14px);padding:20px 22px;font-family:'Onest Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#233e35;animation:ds-arrive .2s cubic-bezier(.2,.7,.3,1)}.ds-hint-card.ds-pinned{background:#f0f3e8;border-color:#bbc8aa}.ds-hint-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--accent,#244f40);font-size:11px;margin-bottom:12px}.ds-hint-pin{border:0;background:transparent;padding:5px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;color:#7b8b91;cursor:pointer}.ds-hint-pin:hover:not(:disabled){background:#eaf0ed;color:var(--accent,#244f40)}.ds-hint-pin[aria-pressed=\"true\"]{color:var(--accent,#244f40)}.ds-hint-pin:focus-visible{outline:2px solid var(--accent,#244f40);outline-offset:4px}.ds-hint-pin:disabled{opacity:.45;cursor:default}.ds-hint-card h3{font-size:17px;font-weight:580;letter-spacing:-.025em;line-height:1.4;margin:0 0 12px}.ds-hint-card>p{font-size:13px;line-height:1.8;color:#455849;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}.ds-hint-stage{display:flex;align-items:center;gap:6px;font-size:10px;line-height:1.5;color:var(--muted,#636c60);margin-top:16px}.ds-stage-dot{width:5px;height:5px;border-radius:50%;background:#a8b3b8;flex:none}.ds-stage-dot.ds-grounded{background:var(--accent,#244f40)}@keyframes ds-arrive{from{opacity:.8;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}@media(max-width:680px){.ds-hint-card{padding:18px}}@media(prefers-reduced-motion:reduce){.ds-hint-card{animation:none!important;transition:none!important}}.ds-mini-panel{width:min(420px,100%);height:560px;display:flex;flex-direction:column;min-width:0;padding:0 14px;background:var(--background,#f6f4ee);color:var(--ink,#233e35);font-family:'Onest Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}.ds-mini-header{display:flex;align-items:center;justify-content:space-between;padding:10px 0 8px;border-bottom:1px solid var(--line,#dedfd4)}.ds-mini-header strong{font-size:18px;font-weight:600;letter-spacing:-.03em}.ds-mini-back{border:0;background:transparent;padding:5px;border-radius:6px;display:inline-flex;color:#7b8b91;cursor:pointer}.ds-mini-back:hover{background:#eaf0ed;color:var(--accent,#244f40)}.ds-mini-status{display:flex;align-items:center;gap:12px;padding:10px 0;color:var(--muted,#636c60);font-size:11px}.ds-mini-status>span{flex:1}.ds-mini-status time{font-variant-numeric:tabular-nums}.ds-mini-resume{border:0;background:none;padding:0;min-height:30px;display:inline-flex;color:var(--accent,#244f40);font-family:inherit;font-size:12px;font-weight:500;cursor:pointer}.ds-mini-back:focus-visible,.ds-mini-resume:focus-visible{outline:2px solid var(--accent,#244f40);outline-offset:4px}.ds-mini-resume:disabled{opacity:.45;cursor:default}.ds-mini-hints{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding-bottom:10px}.ds-mini-hints .ds-mini-hint{padding:14px;margin-bottom:10px}.ds-mini-hints .ds-mini-hint h3{font-size:16px}.ds-mini-hints .ds-mini-hint p{font-size:14px;line-height:1.7}.ds-mini-panel footer{font-size:10px;color:var(--muted,#636c60);line-height:1.6;border-top:1px solid var(--line,#dedfd4);padding:8px 0}.ds-mini-panel footer span{display:block}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Рядом с разговором",
+    "overview": "Суфлёр сопровождает очный разговор: тёплая бумага, тёмные зелёные чернила и компактные рабочие элементы помогают читать короткими взглядами. Вермилионовый знак — две встречные речевые ленты, складывающиеся в S, — связывает название с диалогом. Основные действия сохраняют спокойный зелёный цвет.\n\nСистема зафиксирована по `src/style.css`, `src/main.tsx` и `index.html`. Знак хранится в `public/brand/sufler-symbol.png`, используется в шапке, на экране запуска и как favicon/apple-touch-icon. Композиция встречи и её режим записаны отдельно в `.impeccable/meeting.surface.md`; обновление идентичности сохраняет рабочую структуру встречи. Имена токенов frontmatter — извлечённые роли, а не обязательные названия CSS custom properties.",
+    "keyCharacteristics": [
+      "Тёплые светлые плоскости, тонкие границы и отсутствие теней.",
+      "Зелёный акцент для действий и состояния; вермилион для знака и точки заголовка запуска.",
+      "Локальный Onest Variable, читаемая кириллица и SVG-иконки Phosphor.",
+      "Крупная типографика запуска, компактная типографика рабочего разговора."
+    ],
+    "rules": [
+      {
+        "name": "The State With Words Rule",
+        "body": "Цвет сопровождается текстом состояния: «Предварительно», «Дополнено по источникам», «На паузе», «Демонстрация»; точка не заменяет подпись.",
+        "section": "colors"
+      },
+      {
+        "name": "The Progressive Detail Rule",
+        "body": "Основная мысль видна сразу; источники, прежние подсказки и метрики раскрываются по действию пользователя.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Surface Rule",
+        "body": "Рабочие панели сохраняют плоскую геометрию; состояние показывается границей, фоном, иконкой и подписью.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** Используйте токены существующей палитры и локальный Onest Variable для новых рабочих элементов.",
+      "**Do** Сохраняйте видимые подписи состояния вместе с цветом и иконкой.",
+      "**Do** Оставляйте основную мысль на уровне body; источники и метрики раскрывайте отдельно.",
+      "**Do** Проверяйте новые элементы с клавиатуры и при `prefers-reduced-motion: reduce`.",
+      "**Do** Переносите длинный русский текст, model ID и URL внутри гибких контейнеров.",
+      "**Do** Сохраняйте явные метки демонстрации, предварительного ответа и прогноза."
+    ],
+    "donts": [
+      "**Don't** Представляйте неподтверждённую подсказку или возможный вопрос как установленный факт разговора.",
+      "**Don't** Подменяйте названия действий одной точкой состояния или SVG без accessible name.",
+      "**Don't** Автоматически прокручивайте ленту, когда пользователь читает старые реплики.",
+      "**Don't** Превращайте маленькие метаданные в основной текст ответа или добавляйте тени к плоским рабочим панелям.",
+      "**Don't** Переносите демонстрационные p50/p95 в обещание скорости живой встречи."
+    ]
+  }
+}
