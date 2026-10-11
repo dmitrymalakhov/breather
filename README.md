@@ -6,7 +6,7 @@ Breather is a local web app for in-person meetings on a Mac. It turns microphone
 
 The interface supports **English and Russian**, with English as the default. Use the language selector in the header to switch instantly; your preference is saved in this browser. The mini window follows the same preference.
 
-![Breather meeting workspace with a live transcript and a contextual hint](docs/images/meeting.png)
+![Breather meeting workspace with a live transcript and a contextual hint](docs/images/meeting-en.png)
 
 *Actual application screenshot in demo mode: fictional dialogue and prepared hints, with no microphone or cloud requests.*
 
@@ -35,7 +35,7 @@ The startup script installs missing dependencies from `package-lock.json`, build
 
 **Try it without API keys:** select **View demo**. The demo uses fictional dialogue and prepared hints, without accessing the microphone or cloud APIs.
 
-![Breather start screen with microphone selection, API setup, and a demo option](docs/images/start.png)
+![Breather start screen with microphone selection, API setup, and a demo option](docs/images/start-en.png)
 
 *Start with a demo, or connect speech recognition and an AI provider for a live meeting.*
 
@@ -89,7 +89,7 @@ The browser captures mono PCM16 audio, resamples it to 24 kHz, and sends 100 ms 
 
 The meeting header stays compact so the live feeds can use most of the window height. **Context** opens the goal, summary, and usage panel. On mobile layouts, hints appear before the transcript. Select the microphone icon to choose an audio device; device changes require pausing.
 
-<img src="docs/images/mini.png" alt="Breather mini window showing a contextual hint, pin control, and pause button" width="420">
+<img src="docs/images/mini-en.png" alt="Breather mini window showing a contextual hint, pin control, and pause button" width="420">
 
 *Mini mode showing the same English demo hint. This screenshot uses the ordinary popup fallback.*
 
@@ -100,7 +100,7 @@ The mini window is a React portal into a same-origin document. It shares the exi
 <details>
 <summary>Mobile workspace</summary>
 
-<img src="docs/images/mobile.png" alt="Breather mobile workspace in English, with hints before the transcript" width="390">
+<img src="docs/images/mobile-en.png" alt="Breather mobile workspace in English, with hints before the transcript" width="390">
 
 </details>
 

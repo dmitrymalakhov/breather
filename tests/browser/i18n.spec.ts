@@ -39,7 +39,7 @@ test('English demo and mini window stay synchronized across language changes', a
   await page.setViewportSize({ width: 1366, height: 768 });
   await page.goto('/'); await page.evaluate(() => document.fonts.ready);
   await expect(page.getByRole('button', { name: 'Connect APIs', exact: true })).toBeEnabled();
-  if (process.env.BREATHER_CAPTURE_README === '1') await page.screenshot({ animations: 'disabled', path: resolve('docs/images/start.png') });
+  if (process.env.BREATHER_CAPTURE_README === '1') await page.screenshot({ animations: 'disabled', path: resolve('docs/images/start-en.png') });
   const created = page.waitForRequest(request => request.url().endsWith('/api/meetings') && request.method() === 'POST');
   await page.getByRole('button', { name: 'View demo', exact: true }).click();
   expect((await created).postDataJSON().brief.language).toBe('en');
@@ -49,11 +49,11 @@ test('English demo and mini window stay synchronized across language changes', a
   await page.getByRole('button', { name: 'Pause', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Resume', exact: true })).toBeEnabled();
   expect((await page.locator('body').innerText()).replaceAll('Русский', '')).not.toMatch(/[А-Яа-яЁё]/);
-  if (process.env.BREATHER_CAPTURE_README === '1') await page.screenshot({ animations: 'disabled', path: resolve('docs/images/meeting.png') });
+  if (process.env.BREATHER_CAPTURE_README === '1') await page.screenshot({ animations: 'disabled', path: resolve('docs/images/meeting-en.png') });
   const opened = context.waitForEvent('page'); await page.getByRole('button', { name: 'Mini mode', exact: true }).click(); const mini = await opened;
   await expect(mini.getByRole('heading', { name: 'What is diarization?', exact: true })).toBeVisible();
   await mini.evaluate(() => document.fonts.ready);
-  if (process.env.BREATHER_CAPTURE_README === '1') await mini.screenshot({ animations: 'disabled', path: resolve('docs/images/mini.png') });
+  if (process.env.BREATHER_CAPTURE_README === '1') await mini.screenshot({ animations: 'disabled', path: resolve('docs/images/mini-en.png') });
   await page.getByRole('combobox', { name: 'Interface language' }).selectOption('ru');
   await expect(mini.getByRole('heading', { name: 'Что такое диаризация?', exact: true })).toBeVisible();
   await expect(mini.locator('html')).toHaveAttribute('lang', 'ru');
@@ -61,7 +61,7 @@ test('English demo and mini window stay synchronized across language changes', a
   await expect(mini.getByRole('heading', { name: 'What is diarization?', exact: true })).toBeVisible();
   await page.setViewportSize({ width: 390, height: 844 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  if (process.env.BREATHER_CAPTURE_README === '1') await page.screenshot({ animations: 'disabled', path: resolve('docs/images/mobile.png') });
+  if (process.env.BREATHER_CAPTURE_README === '1') await page.screenshot({ animations: 'disabled', path: resolve('docs/images/mobile-en.png') });
   await mini.close(); await page.getByRole('button', { name: 'Finish', exact: true }).click();
   expect(errors).toEqual([]);
 });
